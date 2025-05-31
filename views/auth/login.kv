@@ -1,0 +1,42 @@
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 20
+        
+        Label:
+            text: 'Iniciar Sesión'
+            font_size: 24
+            size_hint_y: None
+            height: 50
+            
+        TextInput:
+            id: username_input
+            hint_text: 'Nombre de usuario'
+            size_hint_y: None
+            height: 50
+            
+        TextInput:
+            id: password_input
+            hint_text: 'Contraseña'
+            password: True
+            size_hint_y: None
+            height: 50
+            
+        Label:
+            text: root.error_message
+            color: (1, 0, 0, 1)
+            size_hint_y: None
+            height: 30
+            
+        Button:
+            text: 'Iniciar Sesión'
+            size_hint_y: None
+            height: 50
+            on_press: root.attempt_login()
+            
+        Button:
+            text: 'Registrarse'
+            size_hint_y: None
+            height: 50
+            on_press: root.manager.current = 'register'

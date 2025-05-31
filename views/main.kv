@@ -1,0 +1,15 @@
+#:kivy 2.0.0
+#: include views/auth/login.kv
+#: include views/auth/register.kv
+#: include views/tags/tags_manager.kv
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+<RootWidget>:
+    transition: FadeTransition(duration=.3)
+    canvas.before:
+        Color:
+            #rgba: 0.95, 0.95, 0.95, 1  # Fondo gris claro
+            rgba: 0, 0, 0, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size

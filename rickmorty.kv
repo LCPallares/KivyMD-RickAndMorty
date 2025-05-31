@@ -1,0 +1,42 @@
+# Incluir sub-archivos KV
+#:include views/auth/login.kv
+#:include views/auth/register.kv
+
+#:include views/characters/characters_list.kv
+#:include views/favorites/favorites_list.kv
+
+<RootWidget>:
+    transition: FadeTransition(duration=.2)
+    canvas.before:
+        Color:
+            rgba: 0.1, 0.1, 0.1, 1  # Fondo oscuro
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    NavBar:
+
+<NavBar@BoxLayout>:
+    size_hint_y: None
+    height: 50
+    spacing: 10
+    padding: 5
+    canvas.before:
+        Color:
+            rgba: 0.2, 0.2, 0.2, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Button:
+        text: 'Personajes'
+        on_press:
+            print(00000)
+            app.root.current = 'characters_list'
+    Button:
+        text: 'Favoritos'
+        on_press: app.root.current = 'favorites_list'
+    Button:
+        text: 'Cerrar Sesión'
+        on_press: 
+            app.auth_controller.logout()
+            app.root.current = 'login'

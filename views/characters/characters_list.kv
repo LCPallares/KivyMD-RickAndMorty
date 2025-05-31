@@ -1,0 +1,49 @@
+<CharactersListScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        #spacing: 5
+        spacing: dp(5)
+
+        # Barra de navegación - AHORA EN PRIMER PLANO
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            spacing: 10
+            padding: 5
+            canvas.before:
+                Color:
+                    rgba: 0.2, 0.2, 0.2, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Button:
+                text: 'Personajes'
+                background_normal: ''
+                background_color: 0.3, 0.3, 0.5, 1
+                on_press: root.manager.current = 'characters_list'
+
+            Button:
+                text: 'Favoritos'
+                background_normal: ''
+                background_color: 0.3, 0.5, 0.3, 1
+                on_press: root.manager.current = 'favorites_list'
+
+            Button:
+                text: 'Cerrar Sesión'
+                background_normal: ''
+                background_color: 0.8, 0.3, 0.3, 1
+                on_press: 
+                    app.auth_controller.logout()
+                    #root.manager.current = 'login'
+
+        # Área de contenido con prioridad de espacio
+        ScrollView:
+            GridLayout:
+                id: characters_grid
+                cols: 3  # 2 columnas, puedes ajustar
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(10)
+                padding: dp(10)
+                row_default_height: dp(220)  # Altura de cada tile

@@ -1,0 +1,220 @@
+<CharacterTile>:
+    orientation: 'vertical'
+    size_hint: None, None
+    size: dp(200), dp(220)
+    spacing: dp(5)
+    padding: dp(5)
+    canvas.before:
+        Color:
+            rgba: (0.2, 0.2, 0.2, 1) if self.state == 'normal' else (0.3, 0.3, 0.3, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [15,]
+
+    AsyncImage:
+        id: character_image
+        source: ''
+        size_hint: None, None
+        size: dp(180), dp(180)
+        keep_ratio: True
+        allow_stretch: True
+        pos_hint: {'center_x': 0.5}
+
+    Label:
+        id: character_image_text
+        text: ''
+        size_hint_y: None
+        height: dp(20)
+        halign: 'center'
+        text_size: self.width, None
+
+    Label:
+        id: favorite_icon
+        text: '🤍'
+        size_hint_x: None
+        width: dp(30)
+        font_size: dp(20)
+
+    Button:
+        text: 'Personajes'
+        on_press:
+            root.toggle_favorite()
+
+
+
+
+
+
+
+
+<CharacterTile1>:
+    #id: character_image
+    radius: 24
+    box_radius: [0, 0, 24, 24]
+    box_color: 1, 1, 1, .2
+    source: "D:/Programacion/Python/GUI/Kivy/codigos/rickmorty/assets/img4.png"
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint: None, None
+    size: "320dp", "320dp"
+
+    MDIconButton:
+        id: favorite_icon
+        icon: "heart-outline"
+        theme_icon_color: "Custom"
+        icon_color: 1, 0, 0, 1
+        pos_hint: {"center_y": .5}
+        #on_release: self.icon = "heart" if self.icon == "heart-outline" else "heart-outline"
+
+    MDLabel:
+        id: character_image_text
+        text: "Julia and Julie"
+        bold: True
+        color: 1, 1, 1, 1
+
+
+
+
+
+
+# !
+MDSmartTile:
+    radius: 24
+    box_radius: [0, 0, 24, 24]
+    box_color: 1, 1, 1, .2
+    source: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'
+    pos_hint: {"center_x": .5, "center_y": .5}
+    size_hint: None, None
+    size: "320dp", "320dp"
+
+    MDIconButton:
+        icon: "heart-outline"
+        theme_icon_color: "Custom"
+        icon_color: 1, 0, 0, 1
+        pos_hint: {"center_y": .5}
+        on_release: self.icon = "heart" if self.icon == "heart-outline" else "heart-outline"
+
+    MDLabel:
+        text: "Julia and Julie"
+        bold: True
+        color: 1, 1, 1, 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<CharactersListScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 5
+
+        # Barra de navegación - AHORA EN PRIMER PLANO
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            spacing: 10
+            padding: 5
+            canvas.before:
+                Color:
+                    rgba: 0.2, 0.2, 0.2, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Button:
+                text: 'Personajes'
+                background_normal: ''
+                background_color: 0.3, 0.3, 0.5, 1
+                on_press: root.manager.current = 'characters_list'
+
+            Button:
+                text: 'Favoritos'
+                background_normal: ''
+                background_color: 0.3, 0.5, 0.3, 1
+                on_press: root.manager.current = 'favorites_list'
+
+            Button:
+                text: 'Cerrar Sesión'
+                background_normal: ''
+                background_color: 0.8, 0.3, 0.3, 1
+                on_press: 
+                    app.auth_controller.logout()
+                    root.manager.current = 'login'
+
+        # Área de contenido con prioridad de espacio
+        ScrollView:
+            GridLayout:
+                cols: 2
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+                padding: 10
+
+                AsyncImage:
+                    source: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'
+                    size_hint: None, None
+                    size: 200, 200
+                    keep_ratio: True
+                    allow_stretch: True
+
+                Label:
+                    text: 'Rick Sanchez'
+                    size_hint_y: None
+                    height: 30
+
+                Button:
+                    text: '❤️' if False else '🤍'
+                    size_hint: None, None
+                    size: 50, 50
+                    on_press: app.root.get_screen('characters_list').toggle_favorite({'id': 1, 'name': 'Rick Sanchez', 'image': 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
