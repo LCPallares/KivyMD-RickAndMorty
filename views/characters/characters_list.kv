@@ -1,8 +1,8 @@
 <CharactersListScreen>:
-    BoxLayout:
+    MDBoxLayout:
         orientation: 'vertical'
         #spacing: 5
-        spacing: dp(5)
+        #spacing: dp(5)
 
         # Barra de navegación - AHORA EN PRIMER PLANO
         BoxLayout:
@@ -38,12 +38,21 @@
                     #root.manager.current = 'login'
 
         # Área de contenido con prioridad de espacio
-        ScrollView:
-            GridLayout:
+        MDScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            #size_hint_y: 1
+            size_hint_x: 1
+            #size_hint: (1, 1)
+
+            MDGridLayout:
                 id: characters_grid
-                cols: 3  # 2 columnas, puedes ajustar
+                cols: 2  # 2 columnas, puedes ajustar
                 size_hint_y: None
                 height: self.minimum_height
                 spacing: dp(10)
                 padding: dp(10)
-                row_default_height: dp(220)  # Altura de cada tile
+                #row_default_height: dp(220)  # Altura de cada tile
+                adaptive_height: True
+
+

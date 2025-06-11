@@ -1,5 +1,6 @@
 # app/views/characters/characters_list_screen.py
-from kivy.uix.screenmanager import Screen
+#from kivy.uix.screenmanager import Screen
+from kivymd.uix.screen import MDScreen
 from kivy.properties import ListProperty, ObjectProperty, NumericProperty, StringProperty, BooleanProperty
 from kivy.clock import Clock
 from kivy.metrics import dp
@@ -8,7 +9,7 @@ from utils.api_client import RickMortyAPI
 from components.character_tile import CharacterTile
 
 
-class CharactersListScreen(Screen):
+class CharactersListScreen(MDScreen):
     characters = ListProperty([])
     current_page = 1
     # Asegúrate de que el controlador se pase a la vista

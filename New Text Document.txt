@@ -1,5 +1,12 @@
 rickmorty_app/
 ├── main.py
+├── assets/
+│   ├── fonts/
+│   │   ├── font1
+│   │   └── font2
+│   └── images/
+│       ├── logo.svg
+│       └── placeholder.png
 ├── components/
 │   ├── character_tile.py
 │   └── character_tile.kv

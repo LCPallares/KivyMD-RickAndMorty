@@ -9,6 +9,7 @@ class CharacterTile(MDSmartTile):
     character_id = NumericProperty(0)
     is_favorite = BooleanProperty(False)
     character_name = StringProperty('')
+    character_source = StringProperty('')  # kivymd 2.0.1.dev0
 
     def __init__(self, character, controller, **kwargs):
         super().__init__(**kwargs)
@@ -26,7 +27,8 @@ class CharacterTile(MDSmartTile):
 
         # Establecer la fuente de la imagen del MDSmartTile.
         # Ahora es seguro, ya que 'character' ya ha sido validado.
-        self.source = character.get('image', "assets/placeholder_error.png")
+        #self.source = character.get('image', "assets/placeholder_error.png")
+        self.character_source = character.get('image', "assets/placeholder_error.png")
 
         #self.update_favorite_icon()
 

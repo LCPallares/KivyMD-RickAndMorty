@@ -1,4 +1,5 @@
 <LoginScreen>:
+    id: login_screen_widget
     BoxLayout:
         orientation: 'vertical'
         padding: 50
@@ -33,7 +34,9 @@
             text: 'Iniciar Sesión'
             size_hint_y: None
             height: 50
-            on_press: root.attempt_login()
+            on_press:
+                #root.attempt_login()
+                login_screen_widget.attempt_login()
             
         Button:
             text: 'Registrarse'
