@@ -1,15 +1,105 @@
-#:kivy 2.0.0
-#: include views/auth/login.kv
-#: include views/auth/register.kv
-#: include views/tags/tags_manager.kv
-#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+# Incluir sub-archivos KV
+#:include views/auth/login.kv
+#:include views/auth/register.kv
 
-<RootWidget>:
-    transition: FadeTransition(duration=.3)
-    canvas.before:
-        Color:
-            #rgba: 0.95, 0.95, 0.95, 1  # Fondo gris claro
-            rgba: 0, 0, 0, 0
-        Rectangle:
-            pos: self.pos
-            size: self.size
+#:include views/characters/characters_list.kv
+#:include views/favorites/favorites_list.kv
+
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+
+##:import MDSlideTransition kivymd.uix.screenmanager.MDSlideTransition
+##:import MDFadeSlideTransition kivymd.uix.screenmanager.MDFadeSlideTransition
+##:import MDSwapTransition kivymd.uix.screenmanager.MDSwapTransition
+
+#<RootWidget>:
+MDScreen:
+    id: root_kv
+    md_bg_color: self.theme_cls.secondaryContainerColor
+
+    MDNavigationLayout:
+
+        ScreenManager:
+            id: screen_manager
+            #transition: NoTransition()
+
+        # PANEL LATERAL
+        MDNavigationDrawer:
+            id: nav_drawer
+            radius: 0, dp(16), dp(16), 0
+
+            MDNavigationDrawerMenu:
+
+                MDNavigationDrawerHeader:
+                    padding: "16dp", 0, "16dp", "16dp"
+                    spacing: "16dp"
+
+                    MDIcon:
+                        icon: "card-account-mail-outline"
+                        theme_font_size: "Custom"
+                        font_size: "56sp"
+                        theme_icon_color: "Custom"
+                        icon_color: self.theme_cls.primaryColor
+
+                    MDLabel:
+                        text: "Gmail"
+                        font_style: "Display"
+                        role: "medium"
+                        theme_line_height: "Custom"
+                        line_height: 0
+                        adaptive_height: True
+                        theme_text_color: "Custom"
+                        text_color: self.theme_cls.primaryColor
+
+
+                MDNavigationDrawerLabel:
+                    text: "accaount@gmail.com"
+                    theme_text_color: "Custom"
+                    text_color: self.theme_cls.primaryColor
+
+                MDNavigationDrawerItem:
+                    on_press: screen_manager.current = 'characters_list'
+                    MDNavigationDrawerItemLeadingIcon:
+                        icon: "home"
+                    MDNavigationDrawerItemText:
+                        text: "Inicio"
+                    #MDNavigationDrawerItemTrailingText:
+                    #    text: "24"
+
+                MDNavigationDrawerDivider:
+
+                MDNavigationDrawerItem:
+                    MDNavigationDrawerItemLeadingIcon:
+                        icon: "account"
+                    MDNavigationDrawerItemText:
+                        text: "Inbox"
+
+                MDNavigationDrawerItem:
+                    on_press: screen_manager.current = 'favorites_list'
+                    MDNavigationDrawerItemLeadingIcon:
+                        icon: "cards-heart"
+                    MDNavigationDrawerItemText:
+                        text: "Favoritos"
+
+                MDNavigationDrawerItem:
+                    MDNavigationDrawerItemLeadingIcon:
+                        icon: "cog"
+                    MDNavigationDrawerItemText:
+                        text: "Ajustes"
+
+
+
+
+
+
+
+
+#app.root.current = 'characters_list'
+#app.root.current = 'favorites_list'
+#app.auth_controller.logout()
+#app.root.current = 'login'
+
+#root.manager.current = 'characters_list'
+#root.manager.current = 'favorites_list'
+#app.auth_controller.logout()
+#root.manager.current = 'login'

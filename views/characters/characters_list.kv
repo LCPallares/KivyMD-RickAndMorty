@@ -4,38 +4,37 @@
         #spacing: 5
         #spacing: dp(5)
 
-        # Barra de navegación - AHORA EN PRIMER PLANO
-        BoxLayout:
-            size_hint_y: None
-            height: 50
-            spacing: 10
-            padding: 5
-            canvas.before:
-                Color:
-                    rgba: 0.2, 0.2, 0.2, 1
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+        # BARRA SUPERIOR
+        MDTopAppBar:
+            id: top_app_bar
+            type: "small"
+            elevation: 2
 
-            Button:
-                text: 'Personajes'
-                background_normal: ''
-                background_color: 0.3, 0.3, 0.5, 1
-                on_press: root.manager.current = 'characters_list'
+            # BOTONES IZQ
+            MDTopAppBarLeadingButtonContainer:
+                MDActionTopAppBarButton:
+                    icon: "menu"
+                    on_release:
+                        app.root.ids.nav_drawer.set_state("toggle")
+                        #root_kv.ids.nav_drawer.set_state("toggle")
 
-            Button:
-                text: 'Favoritos'
-                background_normal: ''
-                background_color: 0.3, 0.5, 0.3, 1
-                on_press: root.manager.current = 'favorites_list'
+            # TITULO
+            MDTopAppBarTitle:
+                text: "Personajes"
 
-            Button:
-                text: 'Cerrar Sesión'
-                background_normal: ''
-                background_color: 0.8, 0.3, 0.3, 1
-                on_press: 
-                    app.auth_controller.logout()
-                    #root.manager.current = 'login'
+            # BOTONES DER
+            MDTopAppBarTrailingButtonContainer:
+                MDActionTopAppBarButton:
+                    icon: "magnify"
+                    on_release: app.search_action()
+
+                MDActionTopAppBarButton:
+                    icon: "filter-variant"
+                    on_release: app.filter_action()
+
+                MDActionTopAppBarButton:
+                    icon: "dots-vertical"
+                    on_release: app.menu_open(self)
 
         # Área de contenido con prioridad de espacio
         MDScrollView:
