@@ -1,0 +1,37 @@
+rickmorty_app/
+├── main.py
+├── assets/
+│   ├── fonts/
+│   │   ├── font1
+│   │   └── font2
+│   └── images/
+│       ├── logo.svg
+│       └── placeholder.png
+├── components/
+│   ├── character_tile.py
+│   └── character_tile.kv
+├── controllers/
+│   ├── auth_controller.py
+│   ├── character_controller.py
+│   └── favorites_controller.py
+├── models/
+│   ├── user_model.py
+│   ├── favorite_model.py
+│   └── database.py
+├── views/
+│   ├── auth/
+│   │   ├── login.kv
+│   │   ├── login.py
+│   │   ├── register.kv
+│   │   └── register.py
+│   ├── characters/
+│   │   ├── characters_list.kv
+│   │   └── characters_list.py
+│   └── favorites/
+│       ├── favorites_list.kv
+│       └── favorites_list.py
+└── utils/
+    ├── api_client.py
+    └── helpers.py
+
+
