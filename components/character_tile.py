@@ -30,7 +30,21 @@ class CharacterTile(MDSmartTile):
         #self.source = character.get('image', "assets/placeholder_error.png")
         self.character_source = character.get('image', "assets/placeholder_error.png")
 
+
         #self.update_favorite_icon()
+
+        # Configuración del botón de favoritos
+        # self.favorite_btn = self.ids.favorite_button
+        # self.favorite_btn.bind(on_release=self.toggle_favorite)
+        # self.update_favorite_icon()
+
+        # self.bind(
+        #     character_image=self.update_image,
+        #     character_name=self.update_text,
+        #     is_favorite=self.update_favorite_icon
+        # )
+
+        self.bind(is_favorite=self.update_favorite_icon)
 
     def toggle_favorite(self, *args):
         """
@@ -54,9 +68,26 @@ class CharacterTile(MDSmartTile):
         self.toggle_favorite()
         print(f"Presionado tile de {self.character['name']}")
 
-    def update_favorite_icon(self):
+    def update_favorite_icon0(self):
         """Actualiza el estado del ícono basado en la base de datos"""
         if self.controller:
             self.is_favorite = self.controller.is_favorite(self.character_id)
         else:
             self.is_favorite = False
+
+    def update_favorite_icon0b(self):
+        """Actualiza el ícono basado en el estado"""
+        self.favorite_btn.icon = "heart" if self.is_favorite else "heart-outline"
+        self.favorite_btn.icon_color = [1, 0, 0, 1] if self.is_favorite else [1, 1, 1, 1]
+
+    def update_favorite_icon1(self, instance, value):
+        """Actualiza el ícono de favorito"""
+        self.favorite_btn = self.ids.favorite_btn
+        self.favorite_btn.icon = "heart" if value else "heart-outline"
+        self.favorite_btn.icon_color = [1, 0, 0, 1] if value else [1, 1, 1, 0.9]
+
+    def update_favorite_icon(self, instance, value):
+        """Actualiza el ícono y color de favorito según el estado"""
+        self.ids.favorite_btn.icon = "heart" if value else "heart-outline"
+        self.ids.favorite_btn.icon_color = [1, 0, 0, 1] if value else [1, 1, 1, 0.9]
+
