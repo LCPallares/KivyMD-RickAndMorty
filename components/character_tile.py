@@ -46,6 +46,26 @@ class CharacterTile(MDSmartTile):
 
         self.bind(is_favorite=self.update_favorite_icon)
 
+    def on_press0(self):
+        self.toggle_favorite()
+        print(f"Presionado tile de {self.character['name']}")
+
+    def on_press(self):
+        #self.controller.app.root.current = 'character_detail'
+        #self.controller.app.root_kv.ids.screen_manager.current = 'character_detail'  # ok
+        #self.app.sm.current = 'character_detail'  # 'CharacterTile' object has no attribute 'app'
+        self.controller.app.sm.current = 'character_detail'  # ok
+
+        #character_detail_screen = self.controller.app.root.get_screen('character_detail')
+        #character_detail_screen = self.app.sm.get_screen('character_detail')  # .character_id
+        #character_detail_screen = self.controller.app.root.sm.get_screen('character_detail')
+        #character_detail_screen = self.app.sm.get_screen('character_detail')
+        #character_detail_screen = self.manager.get_screen('character_detail')
+        #character_detail_screen = self.MDApp().sm.get_screen('character_detail')
+        character_detail_screen = self.controller.app.sm.get_screen('character_detail')
+        #character_detail_screen = self.controller.app.root_kv.ids.screen_manager.get_screen('character_detail')  # ok
+        character_detail_screen.character_id = self.character_id
+
     def toggle_favorite(self, *args):
         """
         Alterna el estado de favorito del personaje a través del controlador.
@@ -63,10 +83,6 @@ class CharacterTile(MDSmartTile):
             print(f"Fallo al alternar favorito para {self.character_name}.")
         # else:
         #     print("Error: Controlador o datos de personaje no disponibles para alternar favorito.")
-
-    def on_press(self):
-        self.toggle_favorite()
-        print(f"Presionado tile de {self.character['name']}")
 
     def update_favorite_icon0(self):
         """Actualiza el estado del ícono basado en la base de datos"""

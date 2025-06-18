@@ -1,6 +1,7 @@
 from utils.api_client import RickMortyAPI
 from models.favorite_model import Favorite
 from views.characters.characters_list import CharactersListScreen
+from views.characters.character_detail import CharacterDetailScreen
 
 class CharacterController:
     def __init__(self, app):
@@ -13,8 +14,34 @@ class CharacterController:
         self.app.sm.current = 'characters_list'
         print("load_views character")
 
+    def load_views0b(self):
+        self.app.sm.add_widget(
+            CharactersListScreen(name='characters_list', controller=self)
+        )
+        self.app.sm.add_widget(
+            CharacterDetailScreen(name='character_detail', controller=self)
+         )
+        self.app.sm.current = 'characters_list'
+        print("load_views character")
+
+    def load_views(self):
+        views = [
+            CharactersListScreen(name='characters_list', controller=self),
+            CharacterDetailScreen(name='character_detail', controller=self)
+       ]
+        for view in views:
+            self.app.sm.add_widget(view)
+
+        self.app.sm.current = 'characters_list'
+        print("load_views character")
+
+
     def get_characters(self, page=1):
         return RickMortyAPI.get_characters(page)
+
+    def get_character(self, character_id):
+        return RickMortyAPI.get_character(character_id)
+
 
     def toggle_favorite0(self, character):
         user_id = self.app.auth_controller.current_user['id']

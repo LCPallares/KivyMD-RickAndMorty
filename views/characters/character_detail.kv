@@ -1,0 +1,19 @@
+<CharacterDetailScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        AsyncImage:
+            source: root.character_image
+            size_hint_y: None
+            height: '200dp'
+        MDLabel:
+            text: root.character_name
+            #font_style: 'H4'
+            halign: 'center'
+        MDLabel:
+            text: f"Estado: {root.character_status}"
+            #font_style: 'Body1'
+            halign: 'center'
+        MDLabel:
+            text: f"Especie: {root.character_species}"
+            #font_style: 'Body1'
+            halign: 'center'
