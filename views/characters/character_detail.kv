@@ -1,19 +1,174 @@
+<InfoLabel@MDBoxLayout>:
+    title: ""
+    value: ""
+    MDBoxLayout:
+        md_bg_color: self.theme_cls.onPrimaryFixedColor
+        radius: dp(5), dp(5), dp(5), dp(5)
+        padding: "5dp"
+        size_hint_x: 0.3
+        MDLabel:
+            text: root.title
+            theme_text_color: "Custom"
+            text_color: "white"
+            halign: "center"
+    MDBoxLayout:
+        md_bg_color: self.theme_cls.onSecondaryColor
+        radius: dp(5), dp(5), dp(5), dp(5)
+        padding: "5dp"
+        size_hint_x: 0.6
+        MDLabel:
+            text: root.value
+            halign: "center"
+
+
 <CharacterDetailScreen>:
-    BoxLayout:
+    #md_bg_color: self.theme_cls.backgroundColor
+    md_bg_color: self.theme_cls.onPrimaryColor
+
+    MDBoxLayout:
         orientation: 'vertical'
-        AsyncImage:
-            source: root.character_image
-            size_hint_y: None
-            height: '200dp'
-        MDLabel:
-            text: root.character_name
-            #font_style: 'H4'
-            halign: 'center'
-        MDLabel:
-            text: f"Estado: {root.character_status}"
-            #font_style: 'Body1'
-            halign: 'center'
-        MDLabel:
-            text: f"Especie: {root.character_species}"
-            #font_style: 'Body1'
-            halign: 'center'
+        #spacing: 5
+        #spacing: dp(5)
+
+        # BARRA SUPERIOR
+        MDTopAppBar:
+            id: top_app_bar
+            type: "small"
+            elevation: 2
+
+            # BOTONES IZQ
+            MDTopAppBarLeadingButtonContainer:
+                MDActionTopAppBarButton:
+                    icon: "menu"
+                    on_release:
+                        app.root.ids.nav_drawer.set_state("toggle")
+                        #root_kv.ids.nav_drawer.set_state("toggle")
+
+            # TITULO
+            MDTopAppBarTitle:
+                text: "Personajes"
+
+            # BOTONES DER
+            MDTopAppBarTrailingButtonContainer:
+                MDActionTopAppBarButton:
+                    icon: "magnify"
+                    on_release: app.search_action()
+
+                MDActionTopAppBarButton:
+                    icon: "filter-variant"
+                    on_release: app.filter_action()
+
+                MDActionTopAppBarButton:
+                    icon: "dots-vertical"
+                    on_release: app.menu_open(self)
+
+
+        # IMAGEN
+        MDBoxLayout:
+        #MDFloatLayout:
+            size_hint_y: 0.49
+            padding: dp(28)
+            #spacing: dp(2)
+            #size_hint: None, None
+            #radius: dp(50), dp(50), dp(50), dp(50)
+            
+            FitImage:
+                source: root.character_image
+                #size_hint: 1, .3 
+                #height: "400dp"
+                pos_hint: {"top": 1}
+                radius: dp(36), dp(36), dp(36), dp(36)
+
+        # CONTENIDO
+        #MDCard:
+        MDBoxLayout:
+            orientation: "vertical"
+            #size_hint: 1, None
+            size_hint_y: 0.51
+            height: self.minimum_height
+            padding: dp(16)
+            spacing: dp(10)
+            pos_hint: {"center_x": .5, "top": .6}
+            radius: dp(36), dp(36), 0, 0
+            #md_bg_color: self.theme_cls.backgroundColor
+            md_bg_color: self.theme_cls.onPrimaryColor
+            elevation: 0
+
+            pos_hint: {"center_x": .5, "y": 0} # Stick to the bottom
+            radius: dp(36), dp(36), 0, 0 # Radius only on top corners
+
+            # Primario
+            #MDRelativeLayout:
+            MDBoxLayout:
+                #orientation: "vertical"
+                #size_hint_y: None
+                #height: dp(50)
+                
+                adaptive_height: True
+                #md_bg_color: app.theme_cls.errorColor
+                size_hint_y: 0.03
+
+                # TITULO
+                MDBoxLayout:
+                    orientation: "vertical"
+                    pos_hint: {"center_y": .5}
+                    #md_bg_color: app.theme_cls.onErrorColor 
+                    MDLabel:
+                        text: root.character_name
+                        bold: True
+                        adaptive_height: True
+                        font_style: "Headline"
+                        role: "small"
+                        pos_hint: {"center_y": .5}
+                        text_color: app.theme_cls.primaryColor
+                    MDLabel:
+                        text: root.character_species
+                        theme_text_color: "Secondary"
+                        adaptive_height: True
+
+                MDIconButton:
+                    icon: "heart-outline"
+                    pos_hint: {"center_y": .5, "right": .9}
+                    theme_text_color: "Secondary"
+                    user_font_size: "28dp"
+
+            # TEXTO
+            MDLabel:
+                text: "About the character"
+                #font_style: "Body1"
+                adaptive_height: True
+                padding_y: dp(10)
+                halign: "center"
+                bold: True
+                text_color: app.theme_cls.primaryColor
+                font_style: "Title"
+                role: "medium"
+            
+            MDGridLayout:
+                cols: 1
+                spacing: dp(10)
+                padding_y: dp(10)
+                adaptive_height: True
+                #md_bg_color: app.theme_cls.inversePrimaryColor
+                #md_bg_color: app.theme_cls.onPrimaryFixedColor
+                radius: dp(15), dp(15), dp(15), dp(15)
+                size_hint_y: 0.1
+
+                InfoLabel:
+                    title: "Status"
+                    value: root.character_status
+                InfoLabel:
+                    title: "Gender"
+                    value: root.character_gender
+                InfoLabel:
+                    title: "Origin"
+                    value: root.character_origin
+                InfoLabel:
+                    title: "Location"
+                    value: root.character_location
+                InfoLabel:
+                    title: "Created"
+                    value: root.character_created
+
+
+
