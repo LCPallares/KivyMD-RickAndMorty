@@ -10,6 +10,7 @@ class RickMortyAPI:
 
     @staticmethod
     def get_character(character_id):
+        print("DEBUG: llamada funcion get_character de API")
         url = f'https://rickandmortyapi.com/api/character/{character_id}'
         response = requests.get(url)
         return response.json()

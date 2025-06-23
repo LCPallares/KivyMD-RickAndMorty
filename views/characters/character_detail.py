@@ -33,7 +33,9 @@ class CharacterDetailScreen(MDScreen):
         self.load_character_data()
 
     def load_character_data(self):
-        character = self.controller.get_character(self.character_id)
+        # no usar get_character para cargar la info del personaje, ya se obtiene al cargar personajes
+        #character = self.controller.get_character(self.character_id)
+        character = self.character
         self.character_name = character['name']
         self.character_status = character['status']
         self.character_species = character['species']
@@ -44,4 +46,16 @@ class CharacterDetailScreen(MDScreen):
         self.character_location = character['location']['name']
         self.character_created = character['created']
 
+
+    def on_pre_enter0(self, *args):
+        # no usar, perosnajes aun no obtenido antes de presionar
+        character = self.character
+        # Rellenar la pantalla con la información del personaje
+        #self.ids.name_label.text = character['name']
+        #self.ids.status_label.text = character['status']
+
+        self.character_name = character['name']
+        self.character_status = character['status']
+        self.character_species = character['species']
+        self.character_image = character['image']
 

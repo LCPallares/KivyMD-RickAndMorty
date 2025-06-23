@@ -40,6 +40,7 @@ class CharacterController:
         return RickMortyAPI.get_characters(page)
 
     def get_character(self, character_id):
+        print("DEBUG: llamada funcion get_character de controlador")
         return RickMortyAPI.get_character(character_id)
 
 

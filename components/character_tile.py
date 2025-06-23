@@ -50,7 +50,7 @@ class CharacterTile(MDSmartTile):
         self.toggle_favorite()
         print(f"Presionado tile de {self.character['name']}")
 
-    def on_press(self):
+    def on_press1(self):
         #self.controller.app.root.current = 'character_detail'
         #self.controller.app.root_kv.ids.screen_manager.current = 'character_detail'  # ok
         #self.app.sm.current = 'character_detail'  # 'CharacterTile' object has no attribute 'app'
@@ -65,6 +65,11 @@ class CharacterTile(MDSmartTile):
         character_detail_screen = self.controller.app.sm.get_screen('character_detail')
         #character_detail_screen = self.controller.app.root_kv.ids.screen_manager.get_screen('character_detail')  # ok
         character_detail_screen.character_id = self.character_id
+
+    def on_press(self):
+        self.controller.app.sm.current = 'character_detail'
+        character_detail_screen = self.controller.app.sm.get_screen('character_detail')
+        character_detail_screen.character = self.character
 
     def toggle_favorite(self, *args):
         """
