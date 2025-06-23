@@ -28,10 +28,38 @@ class RickMortyApp(MDApp):
         
         # Cargar pantallas de autenticación
         self.auth_controller.load_views()
+
+        from kivy.core.window import Window
+        Window.bind(on_request_close=self.on_request_close)
         
         #return self.sm
         # Devuelve el widget raíz de la aplicación
         return self.root_kv
+
+
+    def on_request_close0(self, *args, **kwargs):
+        self.sm.current = self.sm.previous()
+        return True
+
+    def on_request_close1(self, *args, **kwargs):
+        if self.sm.current != "character_screen":  # Reemplaza "character_screen" con el nombre real de la pantalla de personajes
+            self.sm.current = self.sm.previous()
+        return True
+    
+    def on_request_close(self, *args, **kwargs):
+        no_back_screens = ["characters_list"]  # Agrega más pantallas si es necesario
+        if self.sm.current not in no_back_screens:
+            self.sm.current = self.sm.previous()
+        return True
+
+    def on_request_close3(self, *args, **kwargs):
+        no_back_screens = ["character_screen"]  # Agrega más pantallas si es necesario
+        if self.sm.current not in no_back_screens:
+            self.sm.current = self.sm.previous()
+            return True
+        else:
+            return False
+
 
 if __name__ == '__main__':
     RickMortyApp().run()
