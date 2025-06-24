@@ -69,8 +69,16 @@ class CharacterTile(MDSmartTile):
         # else:
         #     print("Error: Controlador o datos de personaje no disponibles para alternar favorito.")
 
+    # def update_favorite_icon(self, instance, value):
+    #     """Actualiza el ícono y color de favorito según el estado"""
+    #     self.ids.favorite_btn.icon = "heart" if value else "heart-outline"
+    #     self.ids.favorite_btn.icon_color = [1, 0, 0, 1] if value else [1, 1, 1, 0.9]
+
     def update_favorite_icon(self, instance, value):
-        """Actualiza el ícono y color de favorito según el estado"""
-        self.ids.favorite_btn.icon = "heart" if value else "heart-outline"
-        self.ids.favorite_btn.icon_color = [1, 0, 0, 1] if value else [1, 1, 1, 0.9]
+        """Actualiza el estado del ícono basado en la base de datos"""
+        if self.controller:
+            self.is_favorite = self.controller.is_favorite(self.character_id)
+        else:
+            self.is_favorite = False
+
 
