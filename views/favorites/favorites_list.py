@@ -61,12 +61,9 @@ class FavoritesListScreen(Screen):
             grid.add_widget(Label())  # Espaciador
             grid.add_widget(btn)
 
-    def remove_favorite0(self, favorite):
-        if self.controller.remove_favorite(favorite['character_id']):
-            self.load_favorites()  # Recargar la lista
-
     def remove_favorite(self, favorite):
         if self.controller.remove_favorite(favorite['character_id']):
+            print("favorito borrado")
             characters_screen = self.manager.get_screen('characters_list')
             for tile in characters_screen.ids.characters_grid.children:
                 if hasattr(tile, 'character_id') and tile.character_id == favorite['character_id']:
@@ -74,30 +71,4 @@ class FavoritesListScreen(Screen):
                     break
             self.load_favorites()  # Recargar la lista
 
-    def on_favorite_toggled0(self, instance, character_id, is_favorite):
-        """Cuando se quita un favorito, actualizar los tiles correspondientes"""
-        if not is_favorite:
-            if self.controller.remove_favorite(character_id):
-                # Buscar y actualizar el tile en la pantalla de personajes
-                characters_screen = self.manager.get_screen('characters_list')
-                for tile in characters_screen.ids.characters_grid.children:
-                    if hasattr(tile, 'character_id') and tile.character_id == character_id:
-                        tile.update_favorite_icon()
-                        break
-
-    def on_favorite_toggled(self, instance, character_id, is_favorite):
-        """Cuando se quita un favorito, actualizar los tiles correspondientes"""
-        if not is_favorite:
-            if self.controller.remove_favorite(character_id):
-                # Buscar y actualizar el tile en la pantalla de personajes
-                print("favotito borrado")
-                characters_screen = self.manager.get_screen('characters_list')
-                for tile in characters_screen.ids.characters_grid.children:
-                    if hasattr(tile, 'character_id') and tile.character_id == character_id:
-                        print("222")
-                        #tile.update_favorite_icon()
-                        tile.is_favorite = False  # Actualizar la propiedad is_favorite
-                    # No es necesario llamar a update_favorite_icon() explícitamente
-                    # ya que la propiedad is_favorite está enlazada a la función update_favorite_icon
-                        break
 

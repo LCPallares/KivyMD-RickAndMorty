@@ -17,8 +17,8 @@ class RickMortyApp(MDApp):
         # Carga el archivo KV principal que define la estructura de la UI
         from kivy.lang import Builder
         self.root_kv = Builder.load_file("views/main.kv")
+
         # Accede al ScreenManager definido en main.kv usando su ID
-        #self.sm = ScreenManager()
         self.sm = self.root_kv.ids.screen_manager
         
         # Inicializar controladores
@@ -32,19 +32,8 @@ class RickMortyApp(MDApp):
         from kivy.core.window import Window
         Window.bind(on_request_close=self.on_request_close)
         
-        #return self.sm
         # Devuelve el widget raíz de la aplicación
         return self.root_kv
-
-
-    def on_request_close0(self, *args, **kwargs):
-        self.sm.current = self.sm.previous()
-        return True
-
-    def on_request_close1(self, *args, **kwargs):
-        if self.sm.current != "character_screen":  # Reemplaza "character_screen" con el nombre real de la pantalla de personajes
-            self.sm.current = self.sm.previous()
-        return True
     
     def on_request_close(self, *args, **kwargs):
         no_back_screens = ["characters_list"]  # Agrega más pantallas si es necesario
@@ -52,14 +41,8 @@ class RickMortyApp(MDApp):
             self.sm.current = self.sm.previous()
         return True
 
-    def on_request_close3(self, *args, **kwargs):
-        no_back_screens = ["character_screen"]  # Agrega más pantallas si es necesario
-        if self.sm.current not in no_back_screens:
-            self.sm.current = self.sm.previous()
-            return True
-        else:
-            return False
-
+    def stop_app(self):
+        self.stop()
 
 if __name__ == '__main__':
     RickMortyApp().run()

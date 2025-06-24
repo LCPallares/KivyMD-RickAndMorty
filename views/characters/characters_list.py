@@ -1,5 +1,4 @@
 # app/views/characters/characters_list_screen.py
-#from kivy.uix.screenmanager import Screen
 from kivymd.uix.screen import MDScreen
 from kivy.properties import ListProperty, ObjectProperty, NumericProperty, StringProperty, BooleanProperty
 from kivy.clock import Clock

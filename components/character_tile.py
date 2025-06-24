@@ -46,26 +46,6 @@ class CharacterTile(MDSmartTile):
 
         self.bind(is_favorite=self.update_favorite_icon)
 
-    def on_press0(self):
-        self.toggle_favorite()
-        print(f"Presionado tile de {self.character['name']}")
-
-    def on_press1(self):
-        #self.controller.app.root.current = 'character_detail'
-        #self.controller.app.root_kv.ids.screen_manager.current = 'character_detail'  # ok
-        #self.app.sm.current = 'character_detail'  # 'CharacterTile' object has no attribute 'app'
-        self.controller.app.sm.current = 'character_detail'  # ok
-
-        #character_detail_screen = self.controller.app.root.get_screen('character_detail')
-        #character_detail_screen = self.app.sm.get_screen('character_detail')  # .character_id
-        #character_detail_screen = self.controller.app.root.sm.get_screen('character_detail')
-        #character_detail_screen = self.app.sm.get_screen('character_detail')
-        #character_detail_screen = self.manager.get_screen('character_detail')
-        #character_detail_screen = self.MDApp().sm.get_screen('character_detail')
-        character_detail_screen = self.controller.app.sm.get_screen('character_detail')
-        #character_detail_screen = self.controller.app.root_kv.ids.screen_manager.get_screen('character_detail')  # ok
-        character_detail_screen.character_id = self.character_id
-
     def on_press(self):
         self.controller.app.sm.current = 'character_detail'
         character_detail_screen = self.controller.app.sm.get_screen('character_detail')
@@ -88,24 +68,6 @@ class CharacterTile(MDSmartTile):
             print(f"Fallo al alternar favorito para {self.character_name}.")
         # else:
         #     print("Error: Controlador o datos de personaje no disponibles para alternar favorito.")
-
-    def update_favorite_icon0(self):
-        """Actualiza el estado del ícono basado en la base de datos"""
-        if self.controller:
-            self.is_favorite = self.controller.is_favorite(self.character_id)
-        else:
-            self.is_favorite = False
-
-    def update_favorite_icon0b(self):
-        """Actualiza el ícono basado en el estado"""
-        self.favorite_btn.icon = "heart" if self.is_favorite else "heart-outline"
-        self.favorite_btn.icon_color = [1, 0, 0, 1] if self.is_favorite else [1, 1, 1, 1]
-
-    def update_favorite_icon1(self, instance, value):
-        """Actualiza el ícono de favorito"""
-        self.favorite_btn = self.ids.favorite_btn
-        self.favorite_btn.icon = "heart" if value else "heart-outline"
-        self.favorite_btn.icon_color = [1, 0, 0, 1] if value else [1, 1, 1, 0.9]
 
     def update_favorite_icon(self, instance, value):
         """Actualiza el ícono y color de favorito según el estado"""

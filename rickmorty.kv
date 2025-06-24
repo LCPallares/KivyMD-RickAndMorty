@@ -5,14 +5,8 @@
 #:include views/characters/characters_list.kv
 #:include views/favorites/favorites_list.kv
 
-#:import SlideTransition kivy.uix.screenmanager.SlideTransition
 #:import NoTransition kivy.uix.screenmanager.NoTransition
 
-##:import MDSlideTransition kivymd.uix.screenmanager.MDSlideTransition
-##:import MDFadeSlideTransition kivymd.uix.screenmanager.MDFadeSlideTransition
-##:import MDSwapTransition kivymd.uix.screenmanager.MDSwapTransition
-
-#<RootWidget>:
 MDScreen:
     id: root_kv
     md_bg_color: self.theme_cls.secondaryContainerColor
@@ -21,7 +15,7 @@ MDScreen:
 
         ScreenManager:
             id: screen_manager
-            #transition: NoTransition()
+            transition: NoTransition()
 
         # PANEL LATERAL
         MDNavigationDrawer:
@@ -100,11 +94,12 @@ MDScreen:
                     MDNavigationDrawerItemText:
                         text: "Ajustes"
 
-
-
-
-
-
+                MDNavigationDrawerItem:
+                    on_press: app.stop_app()
+                    MDNavigationDrawerItemLeadingIcon:
+                        icon: "cog"
+                    MDNavigationDrawerItemText:
+                        text: "Cerrar App"
 
 
 #app.root.current = 'characters_list'
