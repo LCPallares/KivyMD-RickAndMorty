@@ -71,4 +71,18 @@ class FavoritesListScreen(Screen):
                     break
             self.load_favorites()  # Recargar la lista
 
+    def remove_favorite5(self, favorite):
+        if self.controller.remove_favorite(favorite['character_id']):
+            print("favorito borrado")
+            characters_screen = self.manager.get_screen('characters_list')
+            for tile in characters_screen.ids.characters_grid.children:
+                if hasattr(tile, 'character_id') and tile.character_id == favorite['character_id']:
+                    #definir como False en  el tile de la pantalla personajes
+                    tile.is_favorite = False
+                    break
 
+        character_detail_screen = self.manager.get_screen('character_detail')
+        if character_detail_screen.character and character_detail_screen.character['id'] == favorite['character_id']:
+            character_detail_screen.is_favorite = False
+
+            self.load_favorites()  # Recargar la lista

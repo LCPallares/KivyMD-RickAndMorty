@@ -15,43 +15,22 @@ class CharacterTile(MDSmartTile):
         super().__init__(**kwargs)
         self.character = character
         self.controller = controller
-        #print(f"CharacterTile1 __init__: Character data received: {self.character}")
-        #self.character_data = None
-        
-        # Inicializar las propiedades de Kivy con los datos validados
-        self.character_id = character.get('id', 0) # Usar .get() para evitar KeyError si la clave no existe
+        self.character_id = character.get('id', 0)
         self.character_name = character.get('name', 'Nombre No Disponible')
-        
-        # Determinar el estado inicial de favorito usando el controlador
-        self.is_favorite = self.controller.is_favorite(self.character_id) if self.controller else False
-
-        # Establecer la fuente de la imagen del MDSmartTile.
-        # Ahora es seguro, ya que 'character' ya ha sido validado.
-        #self.source = character.get('image', "assets/placeholder_error.png")
         self.character_source = character.get('image', "assets/placeholder_error.png")
-
-
-        #self.update_favorite_icon()
-
-        # Configuración del botón de favoritos
-        # self.favorite_btn = self.ids.favorite_button
-        # self.favorite_btn.bind(on_release=self.toggle_favorite)
-        # self.update_favorite_icon()
-
-        # self.bind(
-        #     character_image=self.update_image,
-        #     character_name=self.update_text,
-        #     is_favorite=self.update_favorite_icon
-        # )
-
+        self.is_favorite = self.controller.is_favorite(self.character_id) if self.controller else False
         self.bind(is_favorite=self.update_favorite_icon)
 
     def on_press(self):
         self.controller.app.sm.current = 'character_detail'
         character_detail_screen = self.controller.app.sm.get_screen('character_detail')
         character_detail_screen.character = self.character
+        character_detail_screen.controller = self.controller
+        #character_detail_screen.is_favorite = self.is_favorite
+        #character_detail_screen.tile = self  # Pasa la instancia de CharacterTile 5, 5b(character, controller)
+        character_detail_screen.character_tile = self
 
-    def toggle_favorite(self, *args):
+    def toggle_favorite5(self, *args): # funciona en v5, metodo de controlado devuelve boleano ahora
         """
         Alterna el estado de favorito del personaje a través del controlador.
         """
@@ -63,11 +42,18 @@ class CharacterTile(MDSmartTile):
             # Si la operación en el controlador fue exitosa, actualiza la propiedad local.
             # Kivy detectará este cambio y actualizará el icono en el KV automáticamente.
             self.is_favorite = not self.is_favorite
+            character_detail_screen = self.controller.app.sm.get_screen('character_detail')
+            character_detail_screen.is_favorite = self.is_favorite
             print(f"Estado de favorito para {self.character_name} cambiado a: {self.is_favorite}")
         else:
             print(f"Fallo al alternar favorito para {self.character_name}.")
         # else:
         #     print("Error: Controlador o datos de personaje no disponibles para alternar favorito.")
+
+    def toggle_favorite(self, *args):  # 5b version con controlador retornando boleano
+        """ Alterna el estado de favorito del personaje a través del controlador. """
+        self.is_favorite = self.controller.toggle_favorite(self.character) # True/False despues de add/delete fav
+        print(f"Estado de favorito para {self.character_name} cambiado a: {self.is_favorite}")
 
     # def update_favorite_icon(self, instance, value):
     #     """Actualiza el ícono y color de favorito según el estado"""
