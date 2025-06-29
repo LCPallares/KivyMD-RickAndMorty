@@ -25,7 +25,7 @@ class CharacterController:
         print("DEBUG: llamada funcion get_character de controlador")
         return RickMortyAPI.get_character(character_id)
 
-    def toggle_favorite5(self, character):
+    def toggle_favorite(self, character):
         """Alterna el estado de favorito"""
         if not self.app.auth_controller.current_user:
             return False
@@ -35,28 +35,12 @@ class CharacterController:
         
         if self.is_favorite(character_id):
             return Favorite.remove_favorite(user_id, character_id)
+            # Favorite.remove_favorite(user_id, character_id)
+            # return False
         else:
-            return Favorite.add_favorite(
-                user_id,
-                character_id,
-                character['name'],
-                character['image']
-            )
-
-    def toggle_favorite(self, character):  # 5b
-        """Alterna el estado de favorito"""
-        if not self.app.auth_controller.current_user:
-            return False
-            
-        user_id = self.app.auth_controller.current_user['id']
-        character_id = character['id']
-        
-        if self.is_favorite(character_id):
-            Favorite.remove_favorite(user_id, character_id)
-            return False
-        else:
-            Favorite.add_favorite(user_id, character_id, character['name'], character['image'])
-            return True
+            return Favorite.add_favorite(user_id, character_id, character['name'], character['image'])
+            # Favorite.add_favorite(user_id, character_id, character['name'], character['image'])
+            # return True
 
     def is_favorite(self, character_id):
         """Verifica si un personaje es favorito"""

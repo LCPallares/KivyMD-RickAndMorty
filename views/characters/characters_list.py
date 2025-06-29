@@ -19,14 +19,6 @@ class CharactersListScreen(MDScreen):
         super().__init__(**kwargs)
         Clock.schedule_once(lambda dt: self.load_characters()) # Puedes quitar esto y usar on_enter
 
-    # def on_pre_enter(self):
-    #     #self.update_favorites()
-    #     pass
-
-    # def on_enter(self):
-    #     #self.load_characters()  # arreglar que al eliminar de favoritos en la pantalla favoritos el icono no se actualiza
-    #     pass
-
     def load_characters(self):
         if not self.controller:
             print("ERROR: Controlador no está disponible para cargar personajes.")
@@ -45,9 +37,3 @@ class CharactersListScreen(MDScreen):
                 size=(dp(200), dp(220))
             )
             grid.add_widget(tile)
-
-    # def update_favorites(self):
-    #     for child in self.ids.characters_grid.children:
-    #         if isinstance(child, CharacterTile):
-    #             child.is_favorite = child.controller.is_favorite(child.character_id)
-

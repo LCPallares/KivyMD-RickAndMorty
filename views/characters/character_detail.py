@@ -30,18 +30,22 @@ class CharacterDetailScreen(MDScreen):
         
         #self.controller = self.app.sm.controller
         #self.is_favorite = self.controller.is_favorite(self.character_id) if self.controller else False
-        #self.bind(is_favorite=self.update_favorite_icon)
+        #print(f"en init el favorito es {self.is_favorite}")
+        #self.is_favorite = self.character_tile.is_favorite
+        self.bind(is_favorite=self.update_favorite_icon)
 
     def on_enter(self):
         self.load_character_data()
+        # print(f'self.is_favorite al entrar a la pantalla detalles es: {self.is_favorite}')
         # la version 5b necesita character_id, is_favorite, averiguar porque
-        self.character_id = self.character["id"] # 5b
-        self.is_favorite = self.controller.is_favorite(self.character_id) if self.controller else False # 5b
+        # self.character_id = self.character["id"] # 5b
+        # self.is_favorite = self.controller.is_favorite(self.character_id) if self.controller else False # 5b
 
     def load_character_data(self):
         # no usar get_character para cargar la info del personaje, ya se obtiene al cargar personajes
-        #character = self.controller.get_character(self.character_id)
+        # character = self.controller.get_character(self.character_id)
         character = self.character
+        self.character_id = character['id']  # esto evito muchos errores y no tener que usar character_tile
         self.character_name = character['name']
         self.character_status = character['status']
         self.character_species = character['species']
@@ -51,12 +55,21 @@ class CharacterDetailScreen(MDScreen):
         self.character_location = character['location']['name']
         self.character_created = character['created']
 
-    def toggle_favorite5(self, *args):
+        print(self.is_favorite)  # False
+        self.is_favorite = self.controller.is_favorite(self.character_id) if self.controller else False
+        print("en load_charater es", self.is_favorite)  # True
+        self.is_favorite = self.controller.is_favorite(self.character_id)
+        print("en load_charater es", self.is_favorite)  # True
+        self.is_favorite = self.character_tile.is_favorite
+        print(self.character_tile.is_favorite)  # True
+        print(self.character_id)  # 1
+
+    def toggle_favorite(self, *args):
         """ Alterna el estado de favorito del personaje a través del controlador. """
         success = self.controller.toggle_favorite(self.character)        
         if success:
             self.is_favorite = not self.is_favorite
-            self.tile.is_favorite = self.is_favorite  # Actualiza la propiedad is_favorite de CharacterTile
+            # self.character_tile.is_favorite = self.is_favorite  # Actualiza la propiedad is_favorite de CharacterTile
             print(f"Estado de favorito para {self.character_name} cambiado a: {self.is_favorite}")
         else:
             print(f"Fallo al alternar favorito para {self.character_name}.")
@@ -81,7 +94,7 @@ class CharacterDetailScreen(MDScreen):
                 tile.is_favorite = self.is_favorite
                 break
 
-    def toggle_favorite(self, *args):
+    def toggle_favorite5c(self, *args):
         """ Alterna el estado de favorito del personaje a través del controlador. """
         self.is_favorite = self.controller.toggle_favorite(self.character)
         print(f"Estado de favorito para {self.character_name} cambiado a: {self.is_favorite}")
