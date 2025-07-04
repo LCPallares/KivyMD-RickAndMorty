@@ -24,14 +24,15 @@ class RegisterScreen(MDScreen):
             self.success_message = ''
             return
             
-        if self.controller.register(username, password):
+        result, message = self.controller.register(username, password)
+        if result:
             self.error_message = ''
-            self.success_message = 'Registro exitoso! Redirigiendo...'
+            self.success_message = message
             # Redirigir después de 1 segundo
             from kivy.clock import Clock
             Clock.schedule_once(lambda dt: self.redirect_to_login(), 1.5)
         else:
-            self.error_message = 'El usuario ya existe'
+            self.error_message = message
             self.success_message = ''
 
     def redirect_to_login(self):
