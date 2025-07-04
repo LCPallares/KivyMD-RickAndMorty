@@ -1,7 +1,7 @@
-from kivy.uix.screenmanager import Screen
+from kivymd.uix.screen import MDScreen
 from kivy.properties import StringProperty
 
-class LoginScreen(Screen):
+class LoginScreen(MDScreen):
     error_message = StringProperty('')
 
     def __init__(self, **kwargs):

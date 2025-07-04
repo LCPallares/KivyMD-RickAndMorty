@@ -55,14 +55,14 @@ class CharacterDetailScreen(MDScreen):
         self.character_location = character['location']['name']
         self.character_created = character['created']
 
-        print(self.is_favorite)  # False
+        # print(self.is_favorite)  # False
         self.is_favorite = self.controller.is_favorite(self.character_id) if self.controller else False
-        print("en load_charater es", self.is_favorite)  # True
-        self.is_favorite = self.controller.is_favorite(self.character_id)
-        print("en load_charater es", self.is_favorite)  # True
-        self.is_favorite = self.character_tile.is_favorite
-        print(self.character_tile.is_favorite)  # True
-        print(self.character_id)  # 1
+        # print("en load_charater es", self.is_favorite)  # True
+        # self.is_favorite = self.controller.is_favorite(self.character_id)
+        # print("en load_charater es", self.is_favorite)  # True
+        # self.is_favorite = self.character_tile.is_favorite
+        # print(self.character_tile.is_favorite)  # True
+        # print(self.character_id)  # 1
 
     def toggle_favorite(self, *args):
         """ Alterna el estado de favorito del personaje a través del controlador. """

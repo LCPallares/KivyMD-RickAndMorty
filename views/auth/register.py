@@ -1,7 +1,7 @@
-from kivy.uix.screenmanager import Screen
+from kivymd.uix.screen import MDScreen
 from kivy.properties import StringProperty
 
-class RegisterScreen(Screen):
+class RegisterScreen(MDScreen):
     error_message = StringProperty('')
     success_message = StringProperty('')
 

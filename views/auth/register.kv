@@ -1,57 +1,117 @@
 <RegisterScreen>:
-    BoxLayout:
+    #md_bg_color: self.theme_cls.backgroundColor
+    md_bg_color: self.theme_cls.onPrimaryColor
+
+    MDBoxLayout:
         orientation: 'vertical'
-        padding: 50
-        spacing: 20
-        
-        Label:
-            text: 'Registrarse'
-            font_size: 24
-            size_hint_y: None
-            height: 50
+        #spacing: 5
+        #spacing: dp(5)
+
+        # IMAGEN
+        MDBoxLayout:
+        #MDFloatLayout:
+            size_hint_y: 0.33
+            #padding: dp(40)
+            #spacing: dp(2)
+            #size_hint: None, None
+            #radius: dp(50), dp(50), dp(50), dp(50)
             
-        TextInput:
-            id: username_input
-            hint_text: 'Nombre de usuario'
-            size_hint_y: None
-            height: 50
-            
-        TextInput:
-            id: password_input
-            hint_text: 'Contraseña'
-            password: True
-            size_hint_y: None
-            height: 50
-            
-        TextInput:
-            id: confirm_password_input
-            hint_text: 'Confirmar contraseña'
-            password: True
-            size_hint_y: None
-            height: 50
-            
-        Label:
-            text: root.error_message
-            color: (1, 0, 0, 1)
-            size_hint_y: None
-            height: 30
-            
-        Label:
-            text: root.success_message
-            color: (0, 0.7, 0, 1)
-            size_hint_y: None
-            height: 30
-            
-        Button:
-            text: 'Registrarse'
-            size_hint_y: None
-            height: 50
-            on_press: root.attempt_register()
-            
-        Button:
-            text: 'Volver a Login'
-            size_hint_y: None
-            height: 50
-            on_press: 
-                root.reset_form()
-                root.manager.current = 'login'
+            FitImage:
+                source: "assets/images/pk.png"
+                #size_hint: 1, .3 
+                #height: "400dp"
+                #pos_hint: {"top": 1}
+                #radius: dp(36), dp(36), dp(36), dp(36)
+                #size_hint_y:  
+                size_hint_y: None
+                height: "280dp"  # Ajusta el alto de la imagen
+                allow_stretch: True 
+                #size_hint: 0.5, 0.5  # Ajusta el tamaño de la imagen al 50% de su padre 
+
+        # CONTENIDO
+        #MDCard:
+        MDBoxLayout:
+            orientation: "vertical"
+            #size_hint: 1, None
+            size_hint_y: 0.51
+            height: self.minimum_height
+            padding: dp(16)
+            spacing: dp(10)
+            pos_hint: {"center_x": .5, "top": .6}
+            radius: dp(36), dp(36), 0, 0
+            md_bg_color: self.theme_cls.backgroundColor
+            #md_bg_color: self.theme_cls.onPrimaryColor
+            elevation: 0
+
+            pos_hint: {"center_x": .5, "y": 0} # Stick to the bottom
+            radius: dp(36), dp(36), 0, 0 # Radius only on top corners
+
+            # Primario
+            #MDRelativeLayout:
+            MDBoxLayout:
+                orientation: 'vertical'
+                #size_hint_y: None
+                #height: dp(50)
+                spacing: dp(10)
+                padding: dp(10)
+                
+                adaptive_height: True
+                #md_bg_color: app.theme_cls.errorColor
+                md_bg_color: app.theme_cls.onPrimaryFixedColor
+                #size_hint_y: 0.03
+                radius: dp(15), dp(15), dp(15), dp(15)
+
+                MDTextField:
+                    id: username_input
+                    mode: "outlined"
+                    MDTextFieldHintText:
+                        text: "Username"
+
+                MDTextField:
+                    id: password_input
+                    password: True 
+                    mode: "outlined"
+                    MDTextFieldHintText:
+                        text: "Password"
+
+                MDTextField:
+                    id: confirm_password_input
+                    password: True
+                    mode: "outlined"
+                    MDTextFieldHintText:
+                        text: "Confirm Password"
+
+                Label:
+                    text: root.error_message
+                    color: (1, 0, 0, 1)
+                    size_hint_y: None
+                    height: 30
+                    
+                Label:
+                    text: root.success_message
+                    color: (0, 0.7, 0, 1)
+                    size_hint_y: None
+                    height: 30
+
+                MDButton:
+                    #style: "tonal"
+                    style: "filled"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    theme_width: "Custom"
+                    height: "56dp"
+                    size_hint_x: .5
+                    on_press: root.attempt_register()
+                    MDButtonText:
+                        text: "Sign Up"
+                        pos_hint: {"center_x": .5, "center_y": .5}
+
+                MDButton:
+                    #style: "filled"
+                    style: "tonal"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    on_press: 
+                        root.reset_form()
+                        root.manager.current = 'login'
+                    MDButtonText:
+                        text: "Back"
+
