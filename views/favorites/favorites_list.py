@@ -1,10 +1,16 @@
 from kivy.uix.screenmanager import Screen
-from kivy.properties import ListProperty, ObjectProperty
+from kivy.properties import ListProperty, ObjectProperty, StringProperty
 from kivy.clock import Clock
 from kivy.uix.image import AsyncImage
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
+from kivymd.uix.card import MDCard
+
+class CharactersCard(MDCard):
+    source = StringProperty()
+    text = StringProperty()
+    favorite = ObjectProperty()
 
 class FavoritesListScreen(Screen):
     favorites = ListProperty([])
@@ -33,33 +39,13 @@ class FavoritesListScreen(Screen):
         
         for fav in self.favorites:
             # Imagen del personaje
-            img = AsyncImage(
-                source=fav['character_image'],
-                size_hint=(None, None),
-                size=(200, 200),
-                keep_ratio=True,
-                allow_stretch=True
+            fav_card = CharactersCard(
+            source=fav['character_image'],
+            text=fav['character_name'],
+            favorite=fav
             )
             
-            # Nombre del personaje
-            name = Label(
-                text=fav['character_name'],
-                size_hint_y=None,
-                height=30
-            )
-            
-            # Botón para eliminar
-            btn = Button(
-                text='❌',
-                size_hint=(None, None),
-                size=(50, 50),
-                on_press=lambda x, f=fav: self.remove_favorite(f)
-            )
-            
-            grid.add_widget(img)
-            grid.add_widget(name)
-            grid.add_widget(Label())  # Espaciador
-            grid.add_widget(btn)
+            grid.add_widget(fav_card)
 
     def remove_favorite(self, favorite):  # V5b
         if self.controller.remove_favorite(favorite['character_id']):
@@ -75,4 +61,10 @@ class FavoritesListScreen(Screen):
         # if character_detail_screen.character and character_detail_screen.character['id'] == favorite['character_id']:
         #     character_detail_screen.is_favorite = False
 
+            self.load_favorites()  # Recargar la lista
+
+    def remove_favorite0(self, favorite, character_tile):
+        if self.controller.remove_favorite(favorite['character_id']):
+            print("favorito borrado")
+            character_tile.is_favorite = False
             self.load_favorites()  # Recargar la lista
