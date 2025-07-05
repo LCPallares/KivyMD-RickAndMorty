@@ -19,12 +19,13 @@
         halign: "center"
         
     MDButton:
+        id: delete_button
         style: "tonal"
         pos_hint: {"center_x": .5, "center_y": .5}
         theme_width: "Custom"
         height: "56dp"
         size_hint_x: .5
-        on_press: root.parent.parent.parent.parent.remove_favorite(root.favorite)
+        #on_press: root.parent.parent.parent.parent.remove_favorite(root.favorite)
         MDButtonText:
             text: "delete"
             pos_hint: {"center_x": .5, "center_y": .5}

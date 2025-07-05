@@ -44,7 +44,7 @@ class FavoritesListScreen(Screen):
             text=fav['character_name'],
             favorite=fav
             )
-            
+            fav_card.ids.delete_button.bind(on_press=lambda x, f=fav: self.remove_favorite(f))
             grid.add_widget(fav_card)
 
     def remove_favorite(self, favorite):  # V5b
