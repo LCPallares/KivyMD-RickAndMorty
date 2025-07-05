@@ -1,4 +1,5 @@
 from kivymd.app import MDApp
+from kivymd.uix.menu import MDDropdownMenu
 from kivy.uix.screenmanager import ScreenManager
 from controllers.auth_controller import AuthController
 from controllers.character_controller import CharacterController
@@ -43,6 +44,27 @@ class RickMortyApp(MDApp):
 
     def stop_app(self):
         self.stop()
+
+    def search_action(self):
+        print("Search action")
+
+    def filter_action(self):
+        print("Filter action")
+
+    def menu_open(self, button):
+        MDDropdownMenu(
+            caller=button,
+            items=[
+                {
+                    "text": f"Item {i}",
+                    "on_release": lambda x=f"Item {i}": self.menu_callback(x),
+                } for i in range(5)
+            ],
+            width_mult=4,
+        ).open()
+
+    def menu_callback(self, text_item):
+        print(f"Pressed: {text_item}")
 
 if __name__ == '__main__':
     RickMortyApp().run()
