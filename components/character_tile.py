@@ -28,7 +28,7 @@ class CharacterTile(MDSmartTile):
         character_detail_screen.controller = self.controller
 
         # character_detail_screen.is_favorite = self.is_favorite
-        # character_detail_screen.character_tile = self
+        character_detail_screen.character_tile = self
         # character_detail_screen.character_tile.is_favorite = self.is_favorite
         # print(f'self.is_favorite de on_press del tile es: {self.is_favorite}')
         # print(f'self.is_favorite de on_press: {character_detail_screen.character_tile.is_favorite}')

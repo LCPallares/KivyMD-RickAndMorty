@@ -69,7 +69,7 @@ class CharacterDetailScreen(MDScreen):
         success = self.controller.toggle_favorite(self.character)        
         if success:
             self.is_favorite = not self.is_favorite
-            # self.character_tile.is_favorite = self.is_favorite  # Actualiza la propiedad is_favorite de CharacterTile
+            self.character_tile.is_favorite = self.is_favorite  # Actualiza la propiedad is_favorite de CharacterTile
             print(f"Estado de favorito para {self.character_name} cambiado a: {self.is_favorite}")
         else:
             print(f"Fallo al alternar favorito para {self.character_name}.")
