@@ -63,16 +63,20 @@ class RickMortyApp(MDApp):
         print("Filter action")
 
     def menu_open(self, button):
+        print("Menu action")
+        '''
         MDDropdownMenu(
             caller=button,
             items=[
                 {
                     "text": f"Item {i}",
+                    "viewclass": "OneLineListItem",
                     "on_release": lambda x=f"Item {i}": self.menu_callback(x),
                 } for i in range(5)
             ],
             width_mult=4,
         ).open()
+        '''
 
     def menu_callback(self, text_item):
         print(f"Pressed: {text_item}")
