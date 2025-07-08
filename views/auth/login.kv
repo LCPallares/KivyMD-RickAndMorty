@@ -1,7 +1,9 @@
 <LoginScreen>:
     id: login_screen_widget         
-    #md_bg_color: self.theme_cls.backgroundColor
-    md_bg_color: self.theme_cls.onPrimaryColor
+    ####md_bg_color: self.theme_cls.backgroundColor
+    ####md_bg_color: self.theme_cls.onPrimaryColor
+    ####md_bg_color: app.theme_cls.bg_normal
+    ###md_bg_color: app.theme_cls.primary_color
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -36,8 +38,9 @@
             spacing: dp(10)
             pos_hint: {"center_x": .5, "top": .6}
             radius: dp(36), dp(36), 0, 0
-            md_bg_color: self.theme_cls.backgroundColor
-            #md_bg_color: self.theme_cls.onPrimaryColor
+            ####md_bg_color: self.theme_cls.backgroundColor
+            ####md_bg_color: self.theme_cls.onPrimaryColor
+            ###md_bg_color: app.theme_cls.bg_normal
             elevation: 0
 
             pos_hint: {"center_x": .5, "y": 0} # Stick to the bottom
@@ -53,23 +56,21 @@
                 padding: dp(10)
                 
                 adaptive_height: True
-                #md_bg_color: app.theme_cls.errorColor
-                md_bg_color: app.theme_cls.onPrimaryFixedColor
+                ####md_bg_color: app.theme_cls.errorColor
+                #####md_bg_color: app.theme_cls.onPrimaryFixedColor
                 #size_hint_y: 0.03
                 radius: dp(15), dp(15), dp(15), dp(15)
 
                 MDTextField:
                     id: username_input
-                    mode: "outlined"
-                    MDTextFieldHintText:
-                        text: "Username"
+                    #mode: "outlined"
+                    hint_text: "Username"
 
                 MDTextField:
                     id: password_input
                     password: True
-                    mode: "outlined"
-                    MDTextFieldHintText:
-                        text: "Password"
+                    #mode: "outlined"
+                    hint_text: "Password"
 
                 Label:
                     text: root.error_message
@@ -77,18 +78,17 @@
                     size_hint_y: None
                     height: 30
 
-                MDButton:
-                    style: "tonal"
+                MDRaisedButton:
                     pos_hint: {"center_x": .5, "center_y": .5}
-                    theme_width: "Custom"
-                    height: "56dp"
+                    height: dp(56) # Usar dp para la altura
                     size_hint_x: .5
                     on_press:
                         #root.attempt_login()
                         login_screen_widget.attempt_login()
-                    MDButtonText:
-                        text: "Login"
-                        pos_hint: {"center_x": .5, "center_y": .5}
+                    text: "Login"
+                    ###md_bg_color: app.theme_cls.primary_color
+                    ###text_color: app.theme_cls.on_primary_color
+
 
 
             Widget:
@@ -102,9 +102,10 @@
                 padding: dp(10)
                 
                 adaptive_height: True
-                #md_bg_color: app.theme_cls.errorColor
-                #md_bg_color: app.theme_cls.inversePrimaryColor
-                md_bg_color: app.theme_cls.onPrimaryFixedColor
+                ####md_bg_color: app.theme_cls.errorColor
+                ####md_bg_color: app.theme_cls.inversePrimaryColor
+                ####md_bg_color: app.theme_cls.onPrimaryFixedColor
+                ###md_bg_color: app.theme_cls.bg_normal
                 #size_hint_y: 0.03
                 radius: dp(15), dp(15), dp(15), dp(15)
                 #padding_y: dp(10)
@@ -115,14 +116,13 @@
                     #padding_y: dp(10)
                     halign: "center"
                     #bold: True
-                    text_color: app.theme_cls.primaryColor
-                    font_style: "Title"
-                    role: "medium"
+                    ###text_color: app.theme_cls.primaryColor
+                    font_style: "H6"
+                    #role: "medium"
                     
-                MDButton:
-                    style: "filled"
-                    pos_hint: {"center_x": .5, "center_y": .5}
+                MDRaisedButton:
+                    text: "Sign Up" 
+                    size_hint_x: 0.5
+                    height: dp(56)
+                    pos_hint: {"center_x": .5}
                     on_press: root.manager.current = 'register'
-                    MDButtonText:
-                        text: "Sign Up"
-

@@ -7,9 +7,21 @@
 
 #:import NoTransition kivy.uix.screenmanager.NoTransition
 
+<DrawerClickableItem@MDNavigationDrawerItem>
+    focus_color: app.theme_cls.primary_light
+    text_color: "white"
+    icon_color: "white"
+    #ripple_color: "#c5bdd2"
+    selected_color: app.theme_cls.primary_dark
+    
+    #focus_behavior: False
+    _no_ripple_effect: True
+
+
+
 MDScreen:
     id: root_kv
-    md_bg_color: self.theme_cls.secondaryContainerColor
+    #md_bg_color: self.theme_cls.secondaryContainerColor
 
     MDNavigationLayout:
 
@@ -24,71 +36,69 @@ MDScreen:
 
             MDNavigationDrawerMenu:
 
-                MDNavigationDrawerHeader:
-                    padding: "0dp",  0, "0dp", "0dp"
-                    spacing: "0dp" 
+                #MDNavigationDrawerHeader:
+                    #padding: "0dp",  0, "0dp", "0dp"
+                    #spacing: "0dp" 
                     #size_hint_y: None
                     #height: self.minimum_height
                     #adaptive_height: True
-                    height: "100dp"
+                    #height: "100dp"
+                    #source: "assets/images/name_logo.png"
+                    #padding: "12dp", 0, 0, "56dp"
 
-                    FitImage:
-                        source: "assets/images/name_logo.png"
-                        size_hint_y: None
-                        height: "90dp"  # Ajusta el alto de la imagen
-                        allow_stretch: True
-                        #size_hint_y: 1
-                        
+#                    FitImage:
+#                        source: "assets/images/name_logo.png"
+#                        #size_hint_y: None
+#                        height: "150dp"  # Ajusta el alto de la imagen
+#                        allow_stretch: True
+#                        size_hint_y: None
+#                        size_hint_x: 1
+ 
+                FitImage:
+                    source: "assets/images/name_logo.png"
+                    height: "90dp"  # Ajusta el alto de la imagen
+                    allow_stretch: True
+                    size_hint_y: None
+                    size_hint_x: 1
+                               
                 MDNavigationDrawerLabel:
                     text: "poncho6257@hotmail.com"
-                    theme_text_color: "Custom"
-                    text_color: self.theme_cls.primaryColor
+                    #theme_text_color: "Custom"
+                    #text_color: self.theme_cls.primaryColor
 
-                MDNavigationDrawerItem:
+                DrawerClickableItem:
+                    icon: "home"
+                    text: "Home"
                     on_press: screen_manager.current = 'characters_list'
-                    MDNavigationDrawerItemLeadingIcon:
-                        icon: "home"
-                    MDNavigationDrawerItemText:
-                        text: "Home"
-                    #MDNavigationDrawerItemTrailingText:
-                    #    text: "24"
 
                 MDNavigationDrawerDivider:
 
-                MDNavigationDrawerItem:
-                    MDNavigationDrawerItemLeadingIcon:
-                        icon: "magnify"
-                    MDNavigationDrawerItemText:
-                        text: "Search"
+                DrawerClickableItem:
+                    icon: "magnify"
+                    text: "Search"
 
-                MDNavigationDrawerItem:
-                    on_press: screen_manager.current = 'favorites_list'
-                    MDNavigationDrawerItemLeadingIcon:
-                        icon: "cards-heart"
-                    MDNavigationDrawerItemText:
-                        text: "Favorites"
+                DrawerClickableItem:
+                    icon: "cards-heart"
+                    text: "Favorites"
+                    on_press: screen_manager.current = 'favorites_list'               
 
-                MDNavigationDrawerItem:
-                    MDNavigationDrawerItemLeadingIcon:
-                        icon: "cog"
-                    MDNavigationDrawerItemText:
-                        text: "Settings"
+                DrawerClickableItem:
+                    icon: "cog"
+                    text: "Settings"
 
-                MDNavigationDrawerItem:
+                DrawerClickableItem:
+                    icon: "login"
+                    text: "Log Out"
                     on_press:
                         app.auth_controller.logout()
                         screen_manager.current = 'login'
-                    MDNavigationDrawerItemLeadingIcon:
-                        icon: "login"
-                    MDNavigationDrawerItemText:
-                        text: "Log Out"
 
-                MDNavigationDrawerItem:
+                DrawerClickableItem:
+                    icon: "exit-to-app"
+                    text: "Close App"
                     on_press: app.stop_app()
-                    MDNavigationDrawerItemLeadingIcon:
-                        icon: "exit-to-app"
-                    MDNavigationDrawerItemText:
-                        text: "Close App"
+
+
 
 #app.root.current = 'characters_list'
 #app.root.current = 'favorites_list'

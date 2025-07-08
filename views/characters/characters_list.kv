@@ -1,59 +1,43 @@
 <CharactersListScreen>:
+    #md_bg_color: self.theme_cls.backgroundColor # Comentado para 1.1.1
+    #md_bg_color: self.theme_cls.onPrimaryColor # Comentado para 1.1.1
+
     MDBoxLayout:
         orientation: 'vertical'
-        #spacing: 5
-        #spacing: dp(5)
+        #spacing: dp(5) # Comentado, ajustar si es necesario
 
-        # BARRA SUPERIOR
+        # BARRA SUPERIOR - Adaptado a KivyMD 1.1.1 (MDToolbar)
         MDTopAppBar:
             id: top_app_bar
-            type: "small"
+            title: "Characters" # Título directo en MDToolbar
             elevation: 2
+            # 'type' property is not available in MDToolbar (1.1.1)
+            
+            # BOTONES IZQ - Usando left_action_items
+            left_action_items: [["menu", lambda x: app.root.ids.nav_drawer.set_state("toggle")]]
 
-            # BOTONES IZQ
-            MDTopAppBarLeadingButtonContainer:
-                MDActionTopAppBarButton:
-                    icon: "menu"
-                    on_release:
-                        app.root.ids.nav_drawer.set_state("toggle")
-                        #root_kv.ids.nav_drawer.set_state("toggle")
-
-            # TITULO
-            MDTopAppBarTitle:
-                text: "Characters"
-
-            # BOTONES DER
-            MDTopAppBarTrailingButtonContainer:
-                MDActionTopAppBarButton:
-                    icon: "magnify"
-                    on_release: app.search_action()
-
-                MDActionTopAppBarButton:
-                    icon: "filter-variant"
-                    on_release: app.filter_action()
-
-                MDActionTopAppBarButton:
-                    icon: "dots-vertical"
-                    on_release: app.menu_open(self)
+            # BOTONES DER - Usando right_action_items
+            right_action_items: 
+                [
+                ["magnify", lambda x: app.search_action()], \
+                ["filter-variant", lambda x: app.filter_action()], \
+                ["dots-vertical", lambda x: app.menu_open(x)] \
+                ]
 
         # Área de contenido con prioridad de espacio
         MDScrollView:
             do_scroll_x: False
             do_scroll_y: True
-            #size_hint_y: 1
             size_hint_x: 1
-            #size_hint: (1, 1)
+            # size_hint_y: 1 # Esto es el valor predeterminado si no se especifica, no es necesario
 
             MDGridLayout:
                 id: characters_grid
-                cols: 2  # 2 columnas, puedes ajustar
+                cols: 2 # 2 columnas, puedes ajustar
                 size_hint_y: None
                 height: self.minimum_height
                 spacing: dp(10)
                 padding: dp(10)
-                #row_default_height: dp(220)  # Altura de cada tile
+                #row_default_height: dp(220) # Altura de cada tile, puedes ajustar
                 adaptive_height: True
                 size_hint_x: 1
-
-
-

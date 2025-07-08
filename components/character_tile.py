@@ -9,7 +9,7 @@ class CharacterTile(MDSmartTile):
     character_id = NumericProperty(0)
     is_favorite = BooleanProperty(False)
     character_name = StringProperty('')
-    character_source = StringProperty('')  # kivymd 2.0.1.dev0
+    # character_source = StringProperty('')  # kivymd 2.0.1.dev0
 
     def __init__(self, character, controller, **kwargs):
         super().__init__(**kwargs)
@@ -17,7 +17,7 @@ class CharacterTile(MDSmartTile):
         self.controller = controller
         self.character_id = character.get('id', 0)
         self.character_name = character.get('name', 'Nombre No Disponible')
-        self.character_source = character.get('image', "assets/placeholder_error.png")
+        self.source = character.get('image', "assets/placeholder_error.png")  # kivymd 1.1.1
         self.is_favorite = self.controller.is_favorite(self.character_id) if self.controller else False
         self.bind(is_favorite=self.update_favorite_icon)
 
@@ -28,7 +28,7 @@ class CharacterTile(MDSmartTile):
         character_detail_screen.controller = self.controller
 
         # character_detail_screen.is_favorite = self.is_favorite
-        # character_detail_screen.character_tile = self
+        character_detail_screen.character_tile = self
         # character_detail_screen.character_tile.is_favorite = self.is_favorite
         # print(f'self.is_favorite de on_press del tile es: {self.is_favorite}')
         # print(f'self.is_favorite de on_press: {character_detail_screen.character_tile.is_favorite}')

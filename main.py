@@ -12,8 +12,9 @@ class RickMortyApp(MDApp):
         # Configuración específica de MD3
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Teal"
-        self.theme_cls.material_style = "M3"
-        self.theme_cls.dynamic_color = False  # Desactivar si no quieres color dinámico
+        #self.theme_cls.material_style = "M3"
+        #self.theme_cls.dynamic_color = False  # Desactivar si no quieres color dinámico
+        #self.theme_cls.primary_hue = "500"  # "500"
         
         # Carga el archivo KV principal que define la estructura de la UI
         from kivy.lang import Builder
@@ -35,7 +36,17 @@ class RickMortyApp(MDApp):
         
         # Devuelve el widget raíz de la aplicación
         return self.root_kv
-    
+
+    def change_screen(self, screen_name):
+        """
+        Cambia la pantalla actual a la pantalla especificada.
+        :param screen_name: Nombre de la pantalla a la que se desea cambiar.
+        """
+        if hasattr(self.sm, 'current'):
+            self.sm.current = screen_name
+        else:
+            print(f"Error: No se pudo cambiar a la pantalla '{screen_name}'.")
+
     def on_request_close(self, *args, **kwargs):
         no_back_screens = ["characters_list"]  # Agrega más pantallas si es necesario
         if self.sm.current not in no_back_screens:
