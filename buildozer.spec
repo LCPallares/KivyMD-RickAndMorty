@@ -18,7 +18,7 @@ source.include_exts = py,png,jpg,kv,db,ttf,otf,svg,atlas
 
 # (list) Lista de directorios a excluir.
 # Es importante excluir directorios de desarrollo para reducir el tamaño del APK.
-source.exclude_dirs = tests, bin, venv, drive, .git, .vscode, __pycache__, .kivy
+source.exclude_dirs = tests, bin, venv, drive, .git, .vscode, __pycache__, .kivy, screenshots
 
 # (str) Versión de la aplicación.
 version = 0.1

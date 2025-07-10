@@ -6,6 +6,7 @@ rickmorty_app/
 │   │   └── font2
 │   └── images/
 │       ├── logo.svg
+│       ├── icon.png
 │       └── placeholder.png
 ├── components/
 │   ├── character_tile.py
@@ -26,7 +27,9 @@ rickmorty_app/
 │   │   └── register.py
 │   ├── characters/
 │   │   ├── characters_list.kv
-│   │   └── characters_list.py
+│   │   ├── characters_list.py
+│   │   ├── character_detail.kv
+│   │   └── character_detail.py
 │   └── favorites/
 │       ├── favorites_list.kv
 │       └── favorites_list.py
